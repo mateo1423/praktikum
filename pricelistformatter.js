@@ -1,24 +1,22 @@
-function pricelistformatter(data){
-    if(!Array.isArray(data) && !data.length) throw new Error();
+function priceListFormatter(pricelist) {
+    // transformacija modela
+    grouped = pricelist.reduce(function (acc, val) {
+        acc[val.price] = acc[val.price] || [];
+        acc[val.price].push(val);
+        return acc;
+    }, {});
 
-    const orderDatabyPrice = [...data].sort((a,b) => a.price - b.price);
-    const output = createOutput(orderDatabyPrice);
-
-    console.log(output);
+    // output
+    return printOutput(grouped);
+}
+function printOutput(format) {
+    res = ""; 
+  
+    for (let price of Object.keys(format).sort()){
+      res += `${parseFloat(price).toFixed(1)} : ${format[price].map(x => x.from + ' do ' + x.to).join(' , ')} \n`;
+    }
+  
+    return res;
 }
 
-function createOutput(data){
-    let output = '';
-    data.forEach((item, i, arr) => {
-        const dateStr = `${item.from} do ${item.to}`;
-        output +=
-            arr[i - 1]?.price === item.price
-                ? ` ,${dateStr}`
-                : `\n${item.price.toFixed('1')} : ${dateStr}`;
-    
-    });
-
-    return output.trimStart();
-}
-
-module.exports =pricelistformatter;
+module.exports = priceListFormatter;
