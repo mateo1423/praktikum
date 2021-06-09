@@ -1,0 +1,16 @@
+{
+  "name": "praktikum",
+  "version": "1.0.0",
+  "description": "praktikum",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha src/**/**.spec.js",
+    "watch": "mocha --watch src/**/**.spec.js"
+  },
+  "author": "unknown",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "latest",
+    "mocha": "latest"
+  }
+}
